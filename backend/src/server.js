@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 // API Routes - All routes under /api
 app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/leaves', require('./routes/leaveRoutes'));\
+app.use('/api/leaves', require('./routes/leaveRoutes'));
 app.use('/api/admin', adminRoutes);
 
 // Health check endpoint
