@@ -1,37 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import AdminDashboard from './pages/AdminDashboard';
+import EmployeeDashboard from './pages/EmployeeDashboard';
+import ApplyLeave from './pages/ApplyLeave'; // Import ApplyLeave component
+
+// Private Route component
+const PrivateRoute = ({ children, role }) => {
+  const token = localStorage.getItem('token');
+  const userStr = localStorage.getItem('user');
+  
+  if (!token || !userStr) {
+    return <Navigate to="/login" />;
+  }
+
+  try {
+    const user = JSON.parse(userStr);
+    if (role && user.role !== role) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  } catch (error) {
+    return <Navigate to="/login" />;
+  }
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col items-center justify-center">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="mt-8 text-2xl font-semibold text-gray-800">
-          Edit <code className="bg-gray-200 px-2 py-1 rounded font-mono">src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition duration-200"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <div className="mt-10 p-6 bg-white rounded-xl shadow-lg max-w-md">
-          <h2 className="text-xl font-bold text-green-600 mb-2">
-            ✓ Tailwind CSS v3 is Working!
-          </h2>
-          <p className="text-gray-600">
-            If you see this green text and styled components, Tailwind is properly configured.
-          </p>
-          <div className="mt-4 flex gap-2 justify-center">
-            <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Tailwind</span>
-            <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">React</span>
-            <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">CSS</span>
-          </div>
-        </div>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        
+        <Route path="/admin/dashboard" element={
+          <PrivateRoute role="admin">
+            <AdminDashboard />
+          </PrivateRoute>
+        } />
+        
+        <Route path="/employee/dashboard" element={
+          <PrivateRoute role="employee">
+            <EmployeeDashboard />
+          </PrivateRoute>
+        } />
+        
+        {/* Add ApplyLeave route */}
+        <Route path="/employee/apply-leave" element={
+          <PrivateRoute role="employee">
+            <ApplyLeave />
+          </PrivateRoute>
+        } />
+        
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
   );
 }
 
