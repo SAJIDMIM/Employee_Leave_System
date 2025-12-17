@@ -1,3 +1,4 @@
+// EmployeeDashboard.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -53,13 +54,22 @@ const EmployeeDashboard = () => {
     navigate('/login');
   };
 
+  // Function to get name from email (ignores numbers)
+  const getNameFromEmail = (email) => {
+    if (!email) return '';
+    const namePart = email.split('@')[0]; // before @
+    const nameWithoutNumbers = namePart.replace(/\d+/g, ''); // remove numbers
+    const words = nameWithoutNumbers.split(/[\._]/).filter(Boolean); // split by dot or underscore
+    return words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  };
+
   if (loading) return <div className="loading">Loading dashboard...</div>;
 
   return (
     <div className="dashboard employee-dashboard">
       {/* Navigation Bar */}
       <nav className="dashboard-nav">
-        <h2>Welcome, {user?.name}</h2>
+        <h2>Welcome, {user?.name || getNameFromEmail(user?.email)}</h2>
         <button onClick={handleLogout} className="btn-logout">Logout</button>
       </nav>
 
@@ -69,6 +79,10 @@ const EmployeeDashboard = () => {
           <div className="card">
             <h3>Employee ID</h3>
             <p>{user?.employeeId}</p>
+          </div>
+          <div className="card">
+            <h3>Employee Name</h3>
+            <p>{user?.name || getNameFromEmail(user?.email)}</p>
           </div>
           <div className="card">
             <h3>Department</h3>
