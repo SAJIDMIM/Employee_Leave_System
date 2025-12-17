@@ -44,7 +44,7 @@ This project focuses on **core functionality, clean architecture, and backend–
 
 ## Folder Structure
 
-```text
+##```text
 /frontend        → React frontend
 /backend         → Node.js backend
   ├─ controllers → Business logic
@@ -56,10 +56,10 @@ This project focuses on **core functionality, clean architecture, and backend–
 .env              → Environment variables (not committed)
 
 
-Dependencies
-Backend Dependencies (/backend)
+## Dependencies
+## Backend Dependencies (/backend)
 
-Install all required backend dependencies:
+## Install all required backend dependencies:
 
 npm install express mongoose dotenv jsonwebtoken bcryptjs cors express-validator
 
@@ -87,9 +87,9 @@ express-validator – Request validation
 
 nodemon – Auto-restart server during development
 
-Frontend Dependencies (/frontend)
+## Frontend Dependencies (/frontend)
 
-Install frontend dependencies:
+## Install frontend dependencies:
 
 npm install
 
@@ -99,7 +99,7 @@ Or manually install core dependencies:
 npm install react react-dom react-router-dom axios
 
 
-Frontend Packages Used
+## Frontend Packages Used
 
 react – UI library
 
@@ -109,7 +109,7 @@ react-router-dom – Routing
 
 axios – API requests
 
-Setup Instructions
+## Setup Instructions
 1️⃣ Clone the Repository
 git clone <your-repo-url>
 cd <project-folder>
@@ -119,7 +119,7 @@ cd backend
 npm install
 
 
-Create a .env file inside the backend folder:
+## Create a .env file inside the backend folder:
 
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
@@ -132,7 +132,7 @@ Start the backend server:
 npm run dev
 
 
-Backend runs on:
+## Backend runs on:
 http://localhost:5000
 
 3️⃣ Frontend Setup
@@ -140,7 +140,7 @@ cd ../frontend
 npm install
 
 
-Create a .env file inside the frontend folder:
+## Create a .env file inside the frontend folder:
 
 
 
@@ -152,31 +152,13 @@ npm start
 Frontend runs on:
 http://localhost:3000
 
-Admin Account Setup
+## Admin Account Setup
 
 Admin users are automatically created and assigned if the login email matches the value in the ADMIN_EMAILS variable inside the backend .env file.
 
-Example Admin Credentials
-
-Email: admin@example.com
-
-Password: Any password used during login
-
 If the admin email does not exist in the database, it will be created automatically on first login.
 
-API Endpoints
-Authentication
-Method	Endpoint	Description
-POST	/api/auth/login-or-create	Login or auto-create user
-GET	/api/health	API health check
-Leave Management
-Method	Endpoint	Role	Description
-POST	/api/leaves	Employee	Apply for leave
-GET	/api/leaves/my-leaves	Employee	View own leave requests
-GET	/api/leaves/all	Admin	View all leave requests
-PUT	/api/leaves/:id/status	Admin	Approve or reject leave
-Usage Flow
-
+## Features
 User logs in using email and password
 
 JWT token is generated and stored in localStorage
@@ -199,7 +181,7 @@ JWT-based route protection
 
 Role-based access control middleware
 
-Advanced / Bonus Features
+## Advanced / Bonus Features
 
 Audit logging for admin approvals and rejections
 (Example: "Admin X approved leave Y at [timestamp]")
@@ -208,7 +190,7 @@ Centralized error handling
 
 Clean separation of concerns
 
-Submission Notes
+## Submission Notes
 
 Public GitHub repository
 
@@ -226,8 +208,8 @@ Email notifications
 
 File uploads for leave documents
 
-Dashboard analytics
+## Dashboard analytics
 
-Improved UI/UX design
+## Improved UI/UX design
 
-© 2024 Employee Leave Management System
+© 2025 Employee Leave Management System
