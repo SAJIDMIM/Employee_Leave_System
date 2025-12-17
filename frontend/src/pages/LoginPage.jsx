@@ -53,7 +53,8 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/auth/login-or-create`, {
+      // ✅ Updated endpoint to match backend requirement
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
         email: formData.email.toLowerCase().trim(),
         password: formData.password
       });

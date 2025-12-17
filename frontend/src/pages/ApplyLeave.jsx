@@ -56,8 +56,10 @@ const ApplyLeave = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
+
+      // ✅ Updated endpoint to match backend cleanup
       const response = await axios.post(
-        `${API_BASE_URL}/leaves/apply`,
+        `${API_BASE_URL}/leaves`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
